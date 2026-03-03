@@ -24,7 +24,7 @@
     "drinkHighlight": "Brown Sugar Baby Latte",
     "drinkNotes": "Sweet and perfectly balanced",
     "foodHighlight": "Croissant",
-    "foodNotes": "Worst pastry of the series \u2014 like a sponge. Large food and drink menu with seasonal options.",
+    "foodNotes": "Worst pastry of the series — like a sponge. Large food and drink menu with seasonal options.",
     "fillsUpAt": "10am",
     "goodParking": true,
     "tags": [
@@ -37,7 +37,8 @@
     "address": "1246 Allene Ave SW, Atlanta, GA 30310",
     "lat": 33.726,
     "lng": -84.432,
-    "distance_miles": 3.2
+    "distance_miles": 3.2,
+    "website": "https://www.blackcoffeeatl.com/"
   },
   {
     "id": "daily-dose",
@@ -75,7 +76,8 @@
     "address": "907 Memorial Dr SE, Atlanta, GA 30316",
     "lat": 33.747,
     "lng": -84.354,
-    "distance_miles": 0.7
+    "distance_miles": 0.7,
+    "website": "https://www.dailydosecafe.com/"
   },
   {
     "id": "academy-coffee",
@@ -88,19 +90,19 @@
       "score": 4.5
     },
     "ambiance": {
-      "description": "Outdoor-only seating. Noisy \u2014 leaf blowers, dogs, people talking. Small sundry store inside.",
+      "description": "Outdoor-only seating. Noisy — leaf blowers, dogs, people talking. Small sundry store inside.",
       "score": 2
     },
     "quality": {
       "description": "Good espresso but couldn't taste the specialty flavors. Breakfast sandwich was overrated at $12.",
       "score": 3
     },
-    "seating": "No indoor seating \u2014 grab-and-go only. Two indoor benches for waiting.",
+    "seating": "No indoor seating — grab-and-go only. Two indoor benches for waiting.",
     "outlets": "None",
     "workFriendly": false,
-    "workNotes": "Not conducive to working \u2014 grab-and-go only with no indoor seating",
+    "workNotes": "Not conducive to working — grab-and-go only with no indoor seating",
     "drinkHighlight": "Straits of Voicemail Cappuccino",
-    "drinkNotes": "Rose, mint, almond \u2014 good espresso base but couldn't taste the flavors",
+    "drinkNotes": "Rose, mint, almond — good espresso base but couldn't taste the flavors",
     "foodHighlight": "Breakfast Sandwich ($12)",
     "foodNotes": "Beautiful but overrated. Only vanilla or chocolate syrups. Small seasonal menu.",
     "fillsUpAt": null,
@@ -113,14 +115,15 @@
     "address": "1019 Virginia Ave NE, Atlanta, GA 30306",
     "lat": 33.773,
     "lng": -84.351,
-    "distance_miles": 2.5
+    "distance_miles": 2.5,
+    "website": "https://academycoffeeatl.com/"
   },
   {
     "id": "mr-tombstones",
     "name": "Mr. Tombstones",
     "episode": 6,
     "neighborhood": "Marietta",
-    "address_note": "OTP \u2014 outside the perimeter. Inside a renovated house.",
+    "address_note": "OTP — outside the perimeter. Inside a renovated house.",
     "parking": {
       "description": "Small free dedicated lot with overflow and street parking. Warning: towing across the street Mon-Fri.",
       "score": 4
@@ -154,7 +157,8 @@
     "address": "1087 S Marietta Pkwy SE, Marietta, GA 30060",
     "lat": 33.944,
     "lng": -84.528,
-    "distance_miles": 15.9
+    "distance_miles": 15.9,
+    "website": "https://linktr.ee/mrtombstonescoffeeemporium"
   },
   {
     "id": "the-salty",
@@ -167,7 +171,7 @@
       "score": 3.5
     },
     "ambiance": {
-      "description": "Industrial style \u2014 exposed lights, dark colors. Small interior, more designed for grab-and-go. Cozy.",
+      "description": "Industrial style — exposed lights, dark colors. Small interior, more designed for grab-and-go. Cozy.",
       "score": 4.5
     },
     "quality": {
@@ -193,7 +197,8 @@
     "address": "124 Krog St NE, Atlanta, GA 30307",
     "lat": 33.7573126,
     "lng": -84.3646454,
-    "distance_miles": 0.6
+    "distance_miles": 0.6,
+    "website": "https://www.saltydonut.com/locations/atlanta"
   },
   {
     "id": "aurora-coffee",
@@ -218,7 +223,7 @@
     "workFriendly": true,
     "workNotes": "Decent indoor seating with intimate patio",
     "drinkHighlight": "Iced Kodiak",
-    "drinkNotes": "Chocolate and caramel with oat milk \u2014 sweet but not overly so. Option to make it 'grisly' (3x stronger).",
+    "drinkNotes": "Chocolate and caramel with oat milk — sweet but not overly so. Option to make it 'grisly' (3x stronger).",
     "foodHighlight": null,
     "foodNotes": "Has food options. Bare menu with own iced coffee flavors.",
     "fillsUpAt": null,
@@ -231,7 +236,8 @@
     "address": "468 Moreland Ave NE, Atlanta, GA 30307",
     "lat": 33.767058,
     "lng": -84.3491288,
-    "distance_miles": 1.7
+    "distance_miles": 1.7,
+    "website": "https://auroracoffee.com/"
   },
   {
     "id": "condesa-coffee",
@@ -251,7 +257,7 @@
       "description": "Seasonal passion fruit matcha looked promising but flavor was off.",
       "score": 2.5
     },
-    "seating": "Only outdoor seating (gorgeous). No indoor seating \u2014 takeaway counter only.",
+    "seating": "Only outdoor seating (gorgeous). No indoor seating — takeaway counter only.",
     "outlets": "None",
     "workFriendly": false,
     "workNotes": "No indoor seating, no bathroom. Takeaway counter only.",
@@ -270,7 +276,8 @@
     "address": "480 John Wesley Dobbs Ave NE, Atlanta, GA 30312",
     "lat": 33.7594917,
     "lng": -84.371048,
-    "distance_miles": 0.7
+    "distance_miles": 0.7,
+    "website": "https://www.condesacoffee.com/"
   },
   {
     "id": "necessary-purveyor",
@@ -297,7 +304,7 @@
     "drinkHighlight": "Iced Latte with Mocha Syrup",
     "drinkNotes": "Decent and chocolatey",
     "foodHighlight": "Pistachio Croissant (from Alon's)",
-    "foodNotes": "Thick pistachio paste \u2014 star of the show. Cheese Danish was possibly best ever. Pastries not heated. Also has refrigerated items, dry goods, sandwiches, salad bar.",
+    "foodNotes": "Thick pistachio paste — star of the show. Cheese Danish was possibly best ever. Pastries not heated. Also has refrigerated items, dry goods, sandwiches, salad bar.",
     "fillsUpAt": "12pm",
     "tags": [
       "bougie",
@@ -308,7 +315,8 @@
     "address": "639 Glen Iris Dr NE, Atlanta, GA 30308",
     "lat": 33.771926,
     "lng": -84.3675875,
-    "distance_miles": 1.6
+    "distance_miles": 1.6,
+    "website": "https://www.thenecessarypurveyor.com/"
   },
   {
     "id": "javavino",
@@ -333,9 +341,9 @@
     "workFriendly": true,
     "workNotes": "Plenty of outlets. Long wait for drinks (10+ min with only 2 customers).",
     "drinkHighlight": "Beasting Latte",
-    "drinkNotes": "Vanilla and honey \u2014 great",
+    "drinkNotes": "Vanilla and honey — great",
     "foodHighlight": "Red Pumpkin Bread",
-    "foodNotes": "Dense, sticky, dry. Decent pastry selection plus full breakfast menu. Family-owned for 6 generations \u2014 beans grown at their estate in Nicaragua (seed to cup).",
+    "foodNotes": "Dense, sticky, dry. Decent pastry selection plus full breakfast menu. Family-owned for 6 generations — beans grown at their estate in Nicaragua (seed to cup).",
     "fillsUpAt": null,
     "tags": [
       "wine-bar",
@@ -348,7 +356,8 @@
     "address": "579 N Highland Ave NE, Atlanta, GA 30307",
     "lat": 33.7701177,
     "lng": -84.352276,
-    "distance_miles": 1.8
+    "distance_miles": 1.8,
+    "website": "https://javavino.com/"
   },
   {
     "id": "bloom-coffee",
@@ -365,17 +374,17 @@
       "score": 4.5
     },
     "quality": {
-      "description": "Ordered matcha cloud but got lychee lemonade due to machine issue \u2014 tasted like soap. Croughnut was incredible.",
+      "description": "Ordered matcha cloud but got lychee lemonade due to machine issue — tasted like soap. Croughnut was incredible.",
       "score": 3
     },
     "seating": "Larger inside than it appears. Limited outdoor seating. Outlets scattered around (wall, booth, bar, countertop).",
-    "outlets": "Scattered around \u2014 wall, booth, bar, countertop",
+    "outlets": "Scattered around — wall, booth, bar, countertop",
     "workFriendly": true,
     "workNotes": "Good amount of outlets scattered throughout",
     "drinkHighlight": "Matcha Cloud (ordered) / Lychee Lemonade (received)",
-    "drinkNotes": "Machine issue led to wrong drink. Lychee lemonade had hibiscus floral tea base \u2014 tasted like soap.",
+    "drinkNotes": "Machine issue led to wrong drink. Lychee lemonade had hibiscus floral tea base — tasted like soap.",
     "foodHighlight": "Croughnut (from Five Daughters Bakery)",
-    "foodNotes": "Lemon ice box flavor \u2014 possibly favorite pastry of the series. Spongy texture with tart lemon curd.",
+    "foodNotes": "Lemon ice box flavor — possibly favorite pastry of the series. Spongy texture with tart lemon curd.",
     "fillsUpAt": null,
     "tags": [
       "natural-light",
@@ -386,7 +395,8 @@
     "address": "2025 Peachtree St NE, Atlanta, GA 30309",
     "lat": 33.7992703,
     "lng": -84.39197,
-    "distance_miles": 3.7
+    "distance_miles": 3.7,
+    "website": "https://www.bloomcoffeecoatl.com"
   },
   {
     "id": "portrait-coffee",
@@ -411,7 +421,7 @@
     "workFriendly": true,
     "workNotes": "Outlets available along booth and bar top",
     "drinkHighlight": "Aunt Viv Latte",
-    "drinkNotes": "Cardamom \u2014 spicy, tasted like a spicy chai. House-made syrups.",
+    "drinkNotes": "Cardamom — spicy, tasted like a spicy chai. House-made syrups.",
     "foodHighlight": "Chocolate Croissant",
     "foodNotes": "Extremely flaky but dry. Brought in from elsewhere, heated up.",
     "fillsUpAt": null,
@@ -426,7 +436,8 @@
     "address": "1065 Ralph David Abernathy Blvd SW, Atlanta, GA 30310",
     "lat": 33.7383986,
     "lng": -84.4229249,
-    "distance_miles": 3.2
+    "distance_miles": 3.2,
+    "website": "https://portrait.coffee/"
   },
   {
     "id": "el-premio",
@@ -465,7 +476,8 @@
     "address": "800 Rankin St NE, Atlanta, GA 30308",
     "lat": 33.7687015,
     "lng": -84.3637521,
-    "distance_miles": 1.4
+    "distance_miles": 1.4,
+    "website": "https://barpremioatlanta.com/"
   },
   {
     "id": "perk",
@@ -490,9 +502,9 @@
     "workFriendly": true,
     "workNotes": "Outlets everywhere. Fills up around 10am.",
     "drinkHighlight": "Happy Camper",
-    "drinkNotes": "S'mores flavor mocha, half-caf, oat milk \u2014 chocolatey and delicious",
+    "drinkNotes": "S'mores flavor mocha, half-caf, oat milk — chocolatey and delicious",
     "foodHighlight": "Breakfast Crunch Wrap",
-    "foodNotes": "Eggs, hash brown, cheese, tangy sauce like Cane's \u2014 amazing. Savory breakfast is the draw.",
+    "foodNotes": "Eggs, hash brown, cheese, tangy sauce like Cane's — amazing. Savory breakfast is the draw.",
     "fillsUpAt": "10am",
     "tags": [
       "perfect-score",
@@ -504,7 +516,8 @@
     "address": "2380 Hosea Williams Dr, Atlanta, GA 30317",
     "lat": 33.7512108,
     "lng": -84.3094623,
-    "distance_miles": 3.5
+    "distance_miles": 3.5,
+    "website": "https://perccoffee.com/"
   },
   {
     "id": "sweet-hut",
@@ -513,7 +526,7 @@
     "neighborhood": "Midtown",
     "address_note": "Also locations in Marietta, Lilburn, Duluth, Doraville",
     "parking": {
-      "description": "Parking garage with 2-hour validation. Confusing to find \u2014 pass the shop, turn right, right again.",
+      "description": "Parking garage with 2-hour validation. Confusing to find — pass the shop, turn right, right again.",
       "score": 4
     },
     "ambiance": {
@@ -543,14 +556,15 @@
     "address": "935 Peachtree St NE, Atlanta, GA 30309",
     "lat": 33.7803378,
     "lng": -84.3840359,
-    "distance_miles": 2.3
+    "distance_miles": 2.3,
+    "website": "https://sweethutbakery.com/"
   },
   {
     "id": "michael-machi",
     "name": "Michael Machi Cafe",
     "episode": 18,
     "neighborhood": "Duluth",
-    "address_note": "OTP \u2014 outside the perimeter",
+    "address_note": "OTP — outside the perimeter",
     "parking": {
       "description": "Huge free parking lot",
       "score": 5
@@ -560,13 +574,13 @@
       "score": 2.5
     },
     "quality": {
-      "description": "Banana pudding matcha latte was creative \u2014 not too sweet, banana flavor takes over when mixed.",
+      "description": "Banana pudding matcha latte was creative — not too sweet, banana flavor takes over when mixed.",
       "score": 5
     },
     "seating": "Seating available but not comfortable. Sushi boat section.",
     "outlets": "Only 1-2 outlets",
     "workFriendly": false,
-    "workNotes": "NOT a place to get work done \u2014 loud, few outlets, not comfortable",
+    "workNotes": "NOT a place to get work done — loud, few outlets, not comfortable",
     "drinkHighlight": "Banana Pudding Matcha Latte",
     "drinkNotes": "Dollop of banana pudding and wafers on top. Not too sweet, matcha neutral, banana flavor takes over.",
     "foodHighlight": "Soft Serve",
@@ -582,7 +596,8 @@
     "address": "2131 Pleasant Hill Rd, Duluth, GA 30096",
     "lat": 34.0079187,
     "lng": -84.1795406,
-    "distance_miles": 20.9
+    "distance_miles": 20.9,
+    "website": "https://www.matchacafeatl.com/"
   },
   {
     "id": "momo-cafe",
@@ -620,7 +635,8 @@
     "address": "95 8th St NW, Atlanta, GA 30309",
     "lat": 33.7797521,
     "lng": -84.3899941,
-    "distance_miles": 2.4
+    "distance_miles": 2.4,
+    "website": "https://www.momonokiatl.com/"
   },
   {
     "id": "ash-coffee",
@@ -645,7 +661,7 @@
     "workFriendly": true,
     "workNotes": "Outlets along bar and wall. Patio seating available.",
     "drinkHighlight": "Blueberry Matcha",
-    "drinkNotes": "Delicious \u2014 blueberry came through, not too sweet. Not for strong/bitter matcha lovers.",
+    "drinkNotes": "Delicious — blueberry came through, not too sweet. Not for strong/bitter matcha lovers.",
     "foodHighlight": "Pistachio Croissant",
     "foodNotes": "Light, flaky, thick pistachio paste (a bit mushy). Good selection of sweet, savory, and pastries. One of the strongest breakfasts of the series.",
     "fillsUpAt": null,
@@ -658,7 +674,8 @@
     "address": "1189 Virginia Ave NE, Atlanta, GA 30306",
     "lat": 33.7799158,
     "lng": -84.3489936,
-    "distance_miles": 2.4
+    "distance_miles": 2.4,
+    "website": "https://www.ashcoffeeatl.com/"
   },
   {
     "id": "thinkk",
@@ -685,7 +702,7 @@
     "drinkHighlight": "Almond Chai Latte",
     "drinkNotes": "Delightfully spicy with an extra kick",
     "foodHighlight": "Blueberry Cream Cheese Scone",
-    "foodNotes": "Heated. Great flavor but gummy/chewy inside \u2014 wrong texture. All treats made in-house.",
+    "foodNotes": "Heated. Great flavor but gummy/chewy inside — wrong texture. All treats made in-house.",
     "fillsUpAt": null,
     "tags": [
       "coworking-vibes",
@@ -698,7 +715,8 @@
     "address": "652 Angier Ave NE, Atlanta, GA 30308",
     "lat": 33.7666568,
     "lng": -84.365959,
-    "distance_miles": 1.2
+    "distance_miles": 1.2,
+    "website": "https://finca.coffee/"
   },
   {
     "id": "green-beans",
@@ -756,12 +774,12 @@
       "description": "Lavender matcha was grassy and bitter. Cinnamon knot had perfect texture and flaky layers.",
       "score": 3.5
     },
-    "seating": "Plenty of seating \u2014 tables, private alcove, outdoor patio",
+    "seating": "Plenty of seating — tables, private alcove, outdoor patio",
     "outlets": "Not mentioned",
     "workFriendly": true,
     "workNotes": "Plenty of seating options including a private alcove",
     "drinkHighlight": "Lavender Matcha",
-    "drinkNotes": "Grassy and bitter \u2014 needed sweetener. Not her cup of tea.",
+    "drinkNotes": "Grassy and bitter — needed sweetener. Not her cup of tea.",
     "foodHighlight": "Cinnamon Knot",
     "foodNotes": "Perfect texture, flaky layers, perfectly moist. Multitude of pastries. Full breakfast sandwich menu.",
     "fillsUpAt": null,
@@ -775,7 +793,8 @@
     "address": "1192 N Highland Ave NE, Atlanta, GA 30306",
     "lat": 33.7873224,
     "lng": -84.3554485,
-    "distance_miles": 2.7
+    "distance_miles": 2.7,
+    "website": "https://www.sanfranciscocoffeeroastingco.com/"
   },
   {
     "id": "east-pole",
@@ -788,7 +807,7 @@
       "score": 5
     },
     "ambiance": {
-      "description": "Sparse \u2014 tables, decor, selection. No frills. Only vanilla syrup and honey. But excellent hospitality.",
+      "description": "Sparse — tables, decor, selection. No frills. Only vanilla syrup and honey. But excellent hospitality.",
       "score": 3.5
     },
     "quality": {
@@ -798,11 +817,11 @@
     "seating": "Available but only a few outlets scattered around",
     "outlets": "A few scattered around",
     "workFriendly": true,
-    "workNotes": "Remote workers paradise \u2014 pretty much everyone had laptops. Gets packed so arrive early.",
+    "workNotes": "Remote workers paradise — pretty much everyone had laptops. Gets packed so arrive early.",
     "drinkHighlight": "Iced Vanilla Latte",
     "drinkNotes": "Fine, nothing special. Nice cup aesthetic.",
     "foodHighlight": "Queenamon",
-    "foodNotes": "Croissant-like pastry with flaky layers filled with blueberry jam \u2014 really good",
+    "foodNotes": "Croissant-like pastry with flaky layers filled with blueberry jam — really good",
     "fillsUpAt": "Early",
     "tags": [
       "remote-worker-hub",
@@ -813,7 +832,8 @@
     "address": "676 N Highland Ave NE, Atlanta, GA 30306",
     "lat": 33.7729588,
     "lng": -84.3526248,
-    "distance_miles": 1.9
+    "distance_miles": 1.9,
+    "website": "https://eastpole.coffee/"
   },
   {
     "id": "harbor-coffee",
@@ -851,7 +871,8 @@
     "address": "331 Elizabeth St NE, Atlanta, GA 30307",
     "lat": 33.7634814,
     "lng": -84.3584741,
-    "distance_miles": 1.2
+    "distance_miles": 1.2,
+    "website": "https://www.harborcoffeeatl.com/"
   },
   {
     "id": "opo-coffee",
@@ -868,7 +889,7 @@
       "score": 5
     },
     "quality": {
-      "description": "Earl Grey Ube Latte was vibrant purple and tasted like cereal milk/Froot Loops \u2014 highly recommended. Scone was a bit bland.",
+      "description": "Earl Grey Ube Latte was vibrant purple and tasted like cereal milk/Froot Loops — highly recommended. Scone was a bit bland.",
       "score": 4.5
     },
     "seating": "Spacious and bright. Plenty of seating. Abundance of outlets.",
@@ -890,7 +911,8 @@
     "address": "314 E Howard Ave, Decatur, GA 30030",
     "lat": 33.7718874,
     "lng": -84.2924404,
-    "distance_miles": 4.7
+    "distance_miles": 4.7,
+    "website": "https://opocoffee.com/"
   },
   {
     "id": "stereo",
@@ -913,7 +935,7 @@
     "seating": "Huge, open, airy inside. Outdoor patio. Outdoor bar area. Outlets available.",
     "outlets": "Available",
     "workFriendly": true,
-    "workNotes": "Most people were working. Very quiet \u2014 dead silent.",
+    "workNotes": "Most people were working. Very quiet — dead silent.",
     "drinkHighlight": "Matcha Latte with Oat Milk & White Mocha",
     "drinkNotes": "Best matcha ever had. $8.50.",
     "foodHighlight": null,
@@ -929,7 +951,8 @@
     "address": "900 DeKalb Ave NE, Atlanta, GA 30307",
     "lat": 33.7593608,
     "lng": -84.3512244,
-    "distance_miles": 1.3
+    "distance_miles": 1.3,
+    "website": "https://www.stereoatl.com"
   },
   {
     "id": "joes-coffee",
@@ -956,7 +979,7 @@
     "drinkHighlight": "Vanilla Latte with Almond Milk",
     "drinkNotes": "Fine but couldn't taste vanilla",
     "foodHighlight": "Potato & Scallion Empanada",
-    "foodNotes": "Tasted like a samosa, flavorful, with chimichurri. Limited selection \u2014 most pastries were empanadas. Sweet and savory options.",
+    "foodNotes": "Tasted like a samosa, flavorful, with chimichurri. Limited selection — most pastries were empanadas. Sweet and savory options.",
     "fillsUpAt": null,
     "tags": [
       "hipster",
@@ -968,7 +991,8 @@
     "address": "510 Flat Shoals Ave SE, Atlanta, GA 30316",
     "lat": 33.7403458,
     "lng": -84.3454252,
-    "distance_miles": 1.5
+    "distance_miles": 1.5,
+    "website": "https://www.joescoffeehouseeav.com"
   },
   {
     "id": "little-tart",
@@ -988,12 +1012,12 @@
       "description": "Salted honey oat latte was great. Gluten-free lemon blueberry scone was dense, filling, and flavorful.",
       "score": 5
     },
-    "seating": "Tables, booths, bar seating, outdoor patio \u2014 plenty of places to sit",
+    "seating": "Tables, booths, bar seating, outdoor patio — plenty of places to sit",
     "outlets": "Not mentioned",
     "workFriendly": true,
     "workNotes": "Fills up quickly and gets loud",
     "drinkHighlight": "Salted Honey Oat Latte",
-    "drinkNotes": "Salt put it over the edge \u2014 great",
+    "drinkNotes": "Salt put it over the edge — great",
     "foodHighlight": "GF Lemon Blueberry Scone",
     "foodNotes": "Dense, filling, full blueberries, lemon cuts through nicely. Incredible baked goods selection with abundance of gluten-free options. Reasonably priced $4-$8. Brunch menu on weekends.",
     "fillsUpAt": "Early",
@@ -1007,6 +1031,7 @@
     "address": "437 Memorial Dr SE, Atlanta, GA 30312",
     "lat": 33.7465617,
     "lng": -84.3731892,
-    "distance_miles": 0.3
+    "distance_miles": 0.3,
+    "website": "https://www.littletartatl.com/"
   }
 ]
