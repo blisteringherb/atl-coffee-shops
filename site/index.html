@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATL Coffee Shops — Remote Work Directory</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --brown-900: #3B2417;
+    --brown-700: #5C3D2E;
+    --brown-500: #8B6F5E;
+    --brown-300: #C4A882;
+    --brown-100: #E8DDD1;
+    --green-700: #4A6741;
+    --green-500: #6B8F63;
+    --green-100: #E2EDDF;
+    --red-500: #C0695A;
+    --red-100: #F5E0DB;
+    --gold: #D4A84B;
+    --shadow: 0 1px 3px rgba(59,36,23,.08), 0 4px 12px rgba(59,36,23,.04);
+    --shadow-lg: 0 4px 12px rgba(59,36,23,.1), 0 12px 32px rgba(59,36,23,.06);
+    --radius: 12px;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--cream);
+    color: var(--brown-900);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header */
+  .header {
+    background: var(--brown-900);
+    color: var(--cream);
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .header p {
+    color: var(--brown-300);
+    font-size: 0.95rem;
+  }
+  .header .count {
+    display: inline-block;
+    background: var(--brown-700);
+    color: var(--brown-300);
+    font-size: 0.8rem;
+    padding: 0.2em 0.7em;
+    border-radius: 20px;
+    margin-top: 0.75rem;
+  }
+
+  /* Controls */
+  .controls {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  .search-wrap {
+    flex: 1 1 280px;
+    position: relative;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--brown-500);
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 0.6rem 0.75rem 0.6rem 2.4rem;
+    border: 1px solid var(--brown-100);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: var(--warm-white);
+    color: var(--brown-900);
+    outline: none;
+    transition: border-color .15s;
+  }
+  .search-wrap input:focus { border-color: var(--brown-300); }
+  .search-wrap input::placeholder { color: var(--brown-500); }
+
+  select {
+    padding: 0.6rem 2rem 0.6rem 0.75rem;
+    border: 1px solid var(--brown-100);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: var(--warm-white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235C3D2E' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 10px center;
+    color: var(--brown-900);
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+  }
+  select:focus { border-color: var(--brown-300); }
+
+  .toggle-group {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--brown-100);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .toggle-group button {
+    padding: 0.6rem 1rem;
+    border: none;
+    background: var(--warm-white);
+    color: var(--brown-700);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+    border-right: 1px solid var(--brown-100);
+  }
+  .toggle-group button:last-child { border-right: none; }
+  .toggle-group button.active {
+    background: var(--brown-900);
+    color: var(--cream);
+  }
+
+  /* Grid */
+  .grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* Card */
+  .card {
+    background: var(--warm-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: box-shadow .2s, transform .2s;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .card-head {
+    padding: 1.25rem 1.25rem 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .card-head h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .card-head .ep {
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--brown-500);
+    background: var(--brown-100);
+    padding: 0.2em 0.55em;
+    border-radius: 6px;
+  }
+  .card-neighborhood {
+    padding: 0 1.25rem;
+    font-size: 0.85rem;
+    color: var(--brown-500);
+    margin-bottom: 0.75rem;
+  }
+  .card-neighborhood .note {
+    font-size: 0.8rem;
+    color: var(--brown-300);
+    display: block;
+    margin-top: 0.15rem;
+  }
+
+  /* Scores bar */
+  .scores {
+    display: flex;
+    gap: 0;
+    margin: 0 1.25rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--brown-100);
+    margin-bottom: 1rem;
+  }
+  .score-cell {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem 0.25rem;
+    border-right: 1px solid var(--brown-100);
+    background: var(--cream);
+  }
+  .score-cell:last-child { border-right: none; }
+  .score-cell .label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--brown-500);
+    margin-bottom: 0.15rem;
+  }
+  .score-cell .value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brown-900);
+  }
+  .score-cell .value.empty {
+    color: var(--brown-300);
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  /* Highlights */
+  .highlights {
+    padding: 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+  .highlight-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .highlight-row .icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    margin-top: 0.05rem;
+  }
+  .highlight-row .icon.drink { background: var(--green-100); }
+  .highlight-row .icon.food { background: var(--red-100); }
+  .highlight-row .icon.park { background: var(--brown-100); }
+  .highlight-row .hl-content { flex: 1; }
+  .highlight-row .hl-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+  .highlight-row .hl-note {
+    font-size: 0.8rem;
+    color: var(--brown-500);
+    line-height: 1.4;
+  }
+
+  /* Work badge */
+  .card-footer {
+    margin-top: auto;
+    padding: 0.75rem 1.25rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25em 0.6em;
+    border-radius: 6px;
+  }
+  .badge.work-yes {
+    background: var(--green-100);
+    color: var(--green-700);
+  }
+  .badge.work-no {
+    background: var(--red-100);
+    color: var(--red-500);
+  }
+  .badge.outlets {
+    background: var(--brown-100);
+    color: var(--brown-700);
+  }
+  .badge.fills {
+    background: #FFF3E0;
+    color: #B87A3D;
+  }
+
+  /* Empty state */
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--brown-500);
+  }
+  .empty p { font-size: 1.1rem; }
+
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.4rem; }
+    .grid { grid-template-columns: 1fr; padding: 0 1rem 2rem; }
+    .controls { padding: 1rem; }
+    .controls select, .toggle-group { width: 100%; }
+    .toggle-group button { flex: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>ATL Coffee Shops</h1>
+  <p>A remote worker's directory to Atlanta coffee shops</p>
+  <span class="count" id="count"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search" placeholder="Search shops, neighborhoods, drinks...">
+  </div>
+  <select id="neighborhood">
+    <option value="">All neighborhoods</option>
+  </select>
+  <div class="toggle-group" id="workFilter">
+    <button class="active" data-val="">All</button>
+    <button data-val="yes">Work-friendly</button>
+    <button data-val="no">Not for work</button>
+  </div>
+  <div class="toggle-group" id="parkingFilter">
+    <button class="active" data-val="">Any parking</button>
+    <button data-val="good">Good parking</button>
+  </div>
+  <select id="sort">
+    <option value="episode">Episode order</option>
+    <option value="name">Name A-Z</option>
+    <option value="neighborhood">Neighborhood</option>
+    <option value="avg-score">Avg score (high first)</option>
+    <option value="distance">Distance (nearest)</option>
+  </select>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+let SHOPS = [{"id":"black-coffee","name":"Black Coffee","episode":2,"neighborhood":"Westside","address_note":"Inside Vivian apartment complex clubhouse, Capital View","parking":{"description":"Plenty of parking, 2 hours free","score":5},"ambiance":{"description":"Industrial and modern. Hip hop music, BET on TV, art by Black artists on sale. A celebration of Black culture.","score":4},"quality":{"description":"Best hot coffee in a while. Croissant was the worst pastry of the series.","score":3},"seating":"Stools at bar, community table, couches, large patio with limited outdoor tables","outlets":"Not mentioned","workFriendly":true,"workNotes":"Great place to work from home if you don't have any meetings","drinkHighlight":"Brown Sugar Baby Latte","drinkNotes":"Sweet and perfectly balanced","foodHighlight":"Croissant","foodNotes":"Worst pastry of the series — like a sponge. Large food and drink menu with seasonal options.","fillsUpAt":"10am","goodParking":true,"tags":["community","events","pop-ups","large-menu","seasonal-drinks"],"address":"1246 Allene Ave SW, Atlanta, GA 30310","lat":33.726,"lng":-84.432,"distance_miles":3.2},{"id":"daily-dose","name":"Daily Dose Coffee","episode":4,"neighborhood":"Reynoldstown","address_note":"Inside Madison Yards complex","parking":{"description":"Plenty of free street parking and a free parking garage","score":4.5},"ambiance":{"description":"Dark and moody. Wall of coffee table books, illustrated cards/prints, housewares for sale.","score":3.5},"quality":{"description":"Salted maple brown sugar latte was sweet but balanced. Almond croissant from Alon's was good.","score":4},"seating":"Limited indoor seating, standing bar with outlets at every seat, a few patio tables","outlets":"Outlets at every seat along the standing bar","workFriendly":true,"workNotes":"Odd lighting glare can be an issue during Zoom meetings","drinkHighlight":"Salted Maple Brown Sugar Latte","drinkNotes":"Sweet but balanced","foodHighlight":"Almond Croissant (from Alon's)","foodNotes":"Heated, good quality. Limited pastry options. A bit expensive.","fillsUpAt":null,"tags":["moody","limited-seating","pricey"],"goodParking":true,"address":"907 Memorial Dr SE, Atlanta, GA 30316","lat":33.747,"lng":-84.354,"distance_miles":0.7},{"id":"academy-coffee","name":"Academy Coffee","episode":5,"neighborhood":"Virginia Highland","address_note":"Shares space with Kinship Butcher","parking":{"description":"Plenty of free street parking, though further walk if arriving later","score":4.5},"ambiance":{"description":"Outdoor-only seating. Noisy — leaf blowers, dogs, people talking. Small sundry store inside.","score":2},"quality":{"description":"Good espresso but couldn't taste the specialty flavors. Breakfast sandwich was overrated at $12.","score":3},"seating":"No indoor seating — grab-and-go only. Two indoor benches for waiting.","outlets":"None","workFriendly":false,"workNotes":"Not conducive to working — grab-and-go only with no indoor seating","drinkHighlight":"Straits of Voicemail Cappuccino","drinkNotes":"Rose, mint, almond — good espresso base but couldn't taste the flavors","foodHighlight":"Breakfast Sandwich ($12)","foodNotes":"Beautiful but overrated. Only vanilla or chocolate syrups. Small seasonal menu.","fillsUpAt":null,"tags":["grab-and-go","outdoor-only","sundry-store"],"goodParking":true,"address":"1019 Virginia Ave NE, Atlanta, GA 30306","lat":33.773,"lng":-84.351,"distance_miles":2.5},{"id":"mr-tombstones","name":"Mr. Tombstones","episode":6,"neighborhood":"Marietta","address_note":"OTP — outside the perimeter. Inside a renovated house.","parking":{"description":"Small free dedicated lot with overflow and street parking. Warning: towing across the street Mon-Fri.","score":4},"ambiance":{"description":"Halloween year-round theme with incredible attention to detail. Spooky decor, multiple rooms with different vibes. Very community-oriented.","score":5},"quality":{"description":"Incredibly diverse seasonal menu. Famous Skull Muffins. Sweet potato iced latte was subtle and well-spiced.","score":4.5},"seating":"Outdoor patio with mismatched seating, multiple indoor rooms with different vibes","outlets":"Not mentioned","workFriendly":true,"workNotes":"Multiple rooms to choose from for different vibes","drinkHighlight":"Sweet Sayon (Sweet Potato Iced Latte)","drinkNotes":"Cream cheese cold foam, subtle sweet potato, nutmeg, pumpkin pie spice","foodHighlight":"Famous Skull Muffins","foodNotes":"Incredibly diverse seasonal menu. Weekly workshops, classes, and events.","fillsUpAt":null,"tags":["drive-thru","themed","events","community","otp","seasonal-menu"],"goodParking":false,"address":"1087 S Marietta Pkwy SE, Marietta, GA 30060","lat":33.944,"lng":-84.528,"distance_miles":15.9},{"id":"the-salty","name":"The Salty","episode":7,"neighborhood":"Krog Street","address_note":"Near Krog Street Market","parking":{"description":"Multiple paid lots/garages (sometimes free hour depending on day/time). Some free street parking.","score":3.5},"ambiance":{"description":"Industrial style — exposed lights, dark colors. Small interior, more designed for grab-and-go. Cozy.","score":4.5},"quality":{"description":"Gourmet donuts are the star. Cookie butter latte was very sweet. Original glaze donut had perfect texture.","score":4.5},"seating":"Small interior, all seating comfortable with outlets at tables and barstools","outlets":"Outlets at tables and barstools","workFriendly":true,"workNotes":"Small space but comfortable seating with outlets","drinkHighlight":"Cookie Butter & Marshmallow Latte","drinkNotes":"Very sweet, like Trader Joe's cookie butter spread","foodHighlight":"Gourmet Donuts","foodNotes":"Original glaze (perfect texture, favorite), chocolate cake (dry), strawberry shortcake (jam + mascarpone), butterscotch crunch (massive, butter beer vibes)","fillsUpAt":null,"tags":["donuts","grab-and-go","merch","seasonal-specials"],"goodParking":false,"address":"124 Krog St NE, Atlanta, GA 30307","lat":33.7573126,"lng":-84.3646454,"distance_miles":0.6},{"id":"aurora-coffee","name":"Aurora Coffee","episode":8,"neighborhood":"Little Five Points","address_note":null,"parking":{"description":"Large free dedicated parking lot","score":5},"ambiance":{"description":"Quirky, fun, grunge. Wall of concert posters, floating bike, mural, artsy vibe.","score":4},"quality":{"description":"Iced Kodiak was sweet but not overly so. Own iced coffee flavors with option to make it 3x stronger.","score":4.5},"seating":"Decent indoor seating (room for more), intimate patio with lots of tables","outlets":"Not mentioned","workFriendly":true,"workNotes":"Decent indoor seating with intimate patio","drinkHighlight":"Iced Kodiak","drinkNotes":"Chocolate and caramel with oat milk — sweet but not overly so. Option to make it 'grisly' (3x stronger).","foodHighlight":null,"foodNotes":"Has food options. Bare menu with own iced coffee flavors.","fillsUpAt":null,"tags":["artsy","grunge","patio"],"goodParking":true,"address":"468 Moreland Ave NE, Atlanta, GA 30307","lat":33.767058,"lng":-84.3491288,"distance_miles":1.7},{"id":"condesa-coffee","name":"Condesa Coffee","episode":9,"neighborhood":"Reynoldstown","address_note":null,"parking":{"description":"Small lot with a few dedicated spaces. Lots of free street parking.","score":5},"ambiance":{"description":"Small, cozy interior with funky vibes. Super friendly baristas. Built for locals. Outdoor seating only (gorgeous).","score":4},"quality":{"description":"Seasonal passion fruit matcha looked promising but flavor was off.","score":2.5},"seating":"Only outdoor seating (gorgeous). No indoor seating — takeaway counter only.","outlets":"None","workFriendly":false,"workNotes":"No indoor seating, no bathroom. Takeaway counter only.","drinkHighlight":"Seasonal Passion Fruit Matcha","drinkNotes":"Color was promising but flavor was off","foodHighlight":null,"foodNotes":"Very limited food options. Coffee membership available.","fillsUpAt":null,"tags":["grab-and-go","outdoor-only","local-favorite","coffee-membership"],"goodParking":true,"address":"480 John Wesley Dobbs Ave NE, Atlanta, GA 30312","lat":33.7594917,"lng":-84.371048,"distance_miles":0.7},{"id":"necessary-purveyor","name":"Necessary Purveyor","episode":10,"neighborhood":"Ponce City Market","address_note":"Attached to nice apartment complex","parking":{"description":"Ponce City Market lot. Parking garage across street at Krog. Paid street parking. Got a parking ticket.","score":2},"ambiance":{"description":"Beautiful, aesthetically pleasing, bougie. Saxophone music. Clean and curated.","score":5},"quality":{"description":"Pistachio croissant from Alon's was the star. Cheese Danish was incredible. Iced mocha was decent.","score":3.5},"seating":"Lots of seating inside","outlets":"Not mentioned","workFriendly":true,"workNotes":"Gets difficult around noon when it fills up","drinkHighlight":"Iced Latte with Mocha Syrup","drinkNotes":"Decent and chocolatey","foodHighlight":"Pistachio Croissant (from Alon's)","foodNotes":"Thick pistachio paste — star of the show. Cheese Danish was possibly best ever. Pastries not heated. Also has refrigerated items, dry goods, sandwiches, salad bar.","fillsUpAt":"12pm","tags":["bougie","lunch-options","salad-bar"],"goodParking":false,"address":"639 Glen Iris Dr NE, Atlanta, GA 30308","lat":33.771926,"lng":-84.3675875,"distance_miles":1.6},{"id":"javavino","name":"Javavino","episode":12,"neighborhood":"Poncey-Highland","address_note":"Also a wine bar at night","parking":{"description":"Small free lot shared with monastery. Large lot next door belongs to tavern (risky to use).","score":4},"ambiance":{"description":"Funky treehouse vibes. Felt like somebody's living room. Also a wine bar at night.","score":2},"quality":{"description":"Beasting Latte (vanilla/honey) was great. Red Iguana (raspberry/white chocolate) was odd. Long wait times.","score":2.5},"seating":"Few patio tables with fans, casual dining area inside, plenty of outlets","outlets":"Plenty of outlets","workFriendly":true,"workNotes":"Plenty of outlets. Long wait for drinks (10+ min with only 2 customers).","drinkHighlight":"Beasting Latte","drinkNotes":"Vanilla and honey — great","foodHighlight":"Red Pumpkin Bread","foodNotes":"Dense, sticky, dry. Decent pastry selection plus full breakfast menu. Family-owned for 6 generations — beans grown at their estate in Nicaragua (seed to cup).","fillsUpAt":null,"tags":["wine-bar","family-owned","seed-to-cup","full-breakfast","community"],"goodParking":false,"address":"579 N Highland Ave NE, Atlanta, GA 30307","lat":33.7701177,"lng":-84.352276,"distance_miles":1.8},{"id":"bloom-coffee","name":"Bloom Coffee Co","episode":13,"neighborhood":"Buckhead","address_note":null,"parking":{"description":"Small apartment lot to the side, 3 hours validation","score":3.5},"ambiance":{"description":"Industrial with natural light and plants. Cute personal touches, little library, basic merch.","score":4.5},"quality":{"description":"Ordered matcha cloud but got lychee lemonade due to machine issue — tasted like soap. Croughnut was incredible.","score":3},"seating":"Larger inside than it appears. Limited outdoor seating. Outlets scattered around (wall, booth, bar, countertop).","outlets":"Scattered around — wall, booth, bar, countertop","workFriendly":true,"workNotes":"Good amount of outlets scattered throughout","drinkHighlight":"Matcha Cloud (ordered) / Lychee Lemonade (received)","drinkNotes":"Machine issue led to wrong drink. Lychee lemonade had hibiscus floral tea base — tasted like soap.","foodHighlight":"Croughnut (from Five Daughters Bakery)","foodNotes":"Lemon ice box flavor — possibly favorite pastry of the series. Spongy texture with tart lemon curd.","fillsUpAt":null,"tags":["natural-light","little-library","pastries"],"goodParking":false,"address":"2025 Peachtree St NE, Atlanta, GA 30309","lat":33.7992703,"lng":-84.39197,"distance_miles":3.7},{"id":"portrait-coffee","name":"Portrait Coffee","episode":14,"neighborhood":"West End","address_note":null,"parking":{"description":"Giant dedicated free parking lot","score":5},"ambiance":{"description":"Simply decorated. Art from local artists on display and purchasable. Family photos at counter. Records playing.","score":5},"quality":{"description":"Aunt Viv Latte was spicy like a chai. House-made syrups. Chocolate croissant was extremely flaky but dry.","score":4},"seating":"Few patio tables. Outlets along booth and bar top.","outlets":"Along booth and bar top","workFriendly":true,"workNotes":"Outlets available along booth and bar top","drinkHighlight":"Aunt Viv Latte","drinkNotes":"Cardamom — spicy, tasted like a spicy chai. House-made syrups.","foodHighlight":"Chocolate Croissant","foodNotes":"Extremely flaky but dry. Brought in from elsewhere, heated up.","fillsUpAt":null,"tags":["black-owned","community","local-art","roasts-in-house","listening-parties"],"goodParking":true,"address":"1065 Ralph David Abernathy Blvd SW, Atlanta, GA 30310","lat":33.7383986,"lng":-84.4229249,"distance_miles":3.2},{"id":"el-premio","name":"El Premio","episode":15,"neighborhood":"Old Fourth Ward","address_note":"Attached to The Fourth hotel","parking":{"description":"Large paid lot outside. Recommended to find free residential street parking nearby.","score":3},"ambiance":{"description":"Expensive feeling. Light jazz and bossa nova. Warm lighting, surprisingly comfortable.","score":5},"quality":{"description":"Ube matcha was subtle and not overly sweet. Pistachio croissant at $9 was messy and overly sweet.","score":3.5},"seating":"Lots of outdoor seating. Large indoor seating area.","outlets":"Not mentioned","workFriendly":true,"workNotes":"Fills up around 11. Expensive but surprisingly comfortable.","drinkHighlight":"Ube Matcha","drinkNotes":"Not overly sweet, subtle ube flavor like cereal milk","foodHighlight":"Pistachio Croissant ($9)","foodNotes":"Exploded, white chocolate coating overly sweet, not heated, only one napkin. Full breakfast menu.","fillsUpAt":"11am","tags":["hotel-cafe","pricey","full-breakfast","bossa-nova"],"goodParking":false,"address":"800 Rankin St NE, Atlanta, GA 30308","lat":33.7687015,"lng":-84.3637521,"distance_miles":1.4},{"id":"perk","name":"Perk","episode":16,"neighborhood":"East Lake","address_note":null,"parking":{"description":"Plenty of free street parking and neighborhood parking","score":5},"ambiance":{"description":"Great branding. Cute, open, airy, inviting, colorful. Lively baristas. Soft hop music.","score":5},"quality":{"description":"First perfect score of the series. Happy Camper was chocolatey and delicious. Breakfast crunch wrap was amazing.","score":5},"seating":"Lots of outdoor seating (picnic area, alcove, under awning). Outlets everywhere.","outlets":"Everywhere","workFriendly":true,"workNotes":"Outlets everywhere. Fills up around 10am.","drinkHighlight":"Happy Camper","drinkNotes":"S'mores flavor mocha, half-caf, oat milk — chocolatey and delicious","foodHighlight":"Breakfast Crunch Wrap","foodNotes":"Eggs, hash brown, cheese, tangy sauce like Cane's — amazing. Savory breakfast is the draw.","fillsUpAt":"10am","tags":["perfect-score","great-branding","savory-breakfast","colorful"],"goodParking":true,"address":"2380 Hosea Williams Dr, Atlanta, GA 30317","lat":33.7512108,"lng":-84.3094623,"distance_miles":3.5},{"id":"sweet-hut","name":"Sweet Hut","episode":17,"neighborhood":"Midtown","address_note":"Also locations in Marietta, Lilburn, Duluth, Doraville","parking":{"description":"Parking garage with 2-hour validation. Confusing to find — pass the shop, turn right, right again.","score":4},"ambiance":{"description":"Asian cafe and bakery. Inspired the whole coffee shop review series.","score":4.5},"quality":{"description":"Huge selection of buns. Chocolate Nutella bun was rich and a favorite. Lychee black tea with boba was great.","score":4.5},"seating":"Plenty of seating. Outlets around bar and booths.","outlets":"Around bar and booths","workFriendly":true,"workNotes":"Fills up around 1:30pm. Outlets around bar and booths.","drinkHighlight":"Lychee Black Tea with Lychee Jelly & Boba","drinkNotes":"2 free toppings included","foodHighlight":"Chocolate Nutella Bun","foodNotes":"Rich, favorite bun. Also: mozzarella bun, taro bun (dense/mochi), Mexican cream bun (coffee-flavored). Huge bakery selection plus sandwiches.","fillsUpAt":"1:30pm","tags":["asian-bakery","boba","multiple-locations","bakery"],"goodParking":false,"address":"935 Peachtree St NE, Atlanta, GA 30309","lat":33.7803378,"lng":-84.3840359,"distance_miles":2.3},{"id":"michael-machi","name":"Michael Machi Cafe","episode":18,"neighborhood":"Duluth","address_note":"OTP — outside the perimeter","parking":{"description":"Huge free parking lot","score":5},"ambiance":{"description":"Busy and crowded. Cute decor. Specializes in matcha and soft serve.","score":2.5},"quality":{"description":"Banana pudding matcha latte was creative — not too sweet, banana flavor takes over when mixed.","score":5},"seating":"Seating available but not comfortable. Sushi boat section.","outlets":"Only 1-2 outlets","workFriendly":false,"workNotes":"NOT a place to get work done — loud, few outlets, not comfortable","drinkHighlight":"Banana Pudding Matcha Latte","drinkNotes":"Dollop of banana pudding and wafers on top. Not too sweet, matcha neutral, banana flavor takes over.","foodHighlight":"Soft Serve","foodNotes":"American and Asian flavors like black sesame and ube.","fillsUpAt":null,"tags":["matcha-focused","soft-serve","otp","asian-cafe"],"goodParking":true,"address":"2131 Pleasant Hill Rd, Duluth, GA 30096","lat":34.0079187,"lng":-84.1795406,"distance_miles":20.9},{"id":"momo-cafe","name":"Momo Cafe","episode":19,"neighborhood":"Midtown","address_note":"Inside Momo Noki Japanese restaurant","parking":{"description":"Large parking garage next door with 2-hour validation. Paid parallel street parking.","score":4},"ambiance":{"description":"Nice natural light. Coffee shop tucked under staircase with cafe seating upstairs overlooking highway.","score":2.5},"quality":{"description":"Okinawa brown sugar latte fell flat. Caramelized onion-gruyere croissant had incredible flavor but was super dense.","score":3},"seating":"Small upstairs area, not comfy. Overlooks highway. Couple of outlets on booth.","outlets":"Couple of outlets on booth","workFriendly":false,"workNotes":"Seating not comfortable, overlooks highway, limited outlets","drinkHighlight":"Okinawa Brown Sugar Latte","drinkNotes":"Fell flat with almond milk","foodHighlight":"Caramelized Onion-Gruyere Croissant","foodNotes":"Incredible flavor but super dense, not flaky, not heated, felt refrigerated. Listed by Infatuation as one of best in America.","fillsUpAt":null,"tags":["japanese","soft-serve","hidden-gem"],"goodParking":false,"address":"95 8th St NW, Atlanta, GA 30309","lat":33.7797521,"lng":-84.3899941,"distance_miles":2.4},{"id":"ash-coffee","name":"Ash Coffee","episode":20,"neighborhood":"Virginia Highland","address_note":null,"parking":{"description":"No dedicated lot. Plenty of street parking.","score":5},"ambiance":{"description":"General store feel. Tons of items for sale. Quirky, fun decor.","score":5},"quality":{"description":"Blueberry matcha was delicious. Pistachio croissant was light and flaky. One of the strongest breakfasts of the series.","score":4.5},"seating":"Some inside, patio (not super cozy but lots of seats). Outlets along bar and wall.","outlets":"Along bar and wall","workFriendly":true,"workNotes":"Outlets along bar and wall. Patio seating available.","drinkHighlight":"Blueberry Matcha","drinkNotes":"Delicious — blueberry came through, not too sweet. Not for strong/bitter matcha lovers.","foodHighlight":"Pistachio Croissant","foodNotes":"Light, flaky, thick pistachio paste (a bit mushy). Good selection of sweet, savory, and pastries. One of the strongest breakfasts of the series.","fillsUpAt":null,"tags":["general-store","great-breakfast","favorites-list"],"goodParking":true,"address":"1189 Virginia Ave NE, Atlanta, GA 30306","lat":33.7799158,"lng":-84.3489936,"distance_miles":2.4},{"id":"thinkk","name":"Thinkk","episode":21,"neighborhood":"Old Fourth Ward","address_note":"Shares space with apartment leasing office","parking":{"description":"Plenty of free street parking","score":4.5},"ambiance":{"description":"Huge space. Gorgeous area with giant water feature. Modern without feeling cold. LGBT-friendly decor. Merch and knick-knacks.","score":5},"quality":{"description":"Almond chai latte was delightfully spicy. Blueberry cream cheese scone had great flavor but gummy texture.","score":3.5},"seating":"Huge space with plenty of seating. Large workspace area with outlets and a printer. Dog beds under desks.","outlets":"In the workspace area (few and far between elsewhere)","workFriendly":true,"workNotes":"Dedicated workspace area with outlets and a printer. Dog beds under desks. Few outlets outside the workspace.","drinkHighlight":"Almond Chai Latte","drinkNotes":"Delightfully spicy with an extra kick","foodHighlight":"Blueberry Cream Cheese Scone","foodNotes":"Heated. Great flavor but gummy/chewy inside — wrong texture. All treats made in-house.","fillsUpAt":null,"tags":["coworking-vibes","dog-friendly","lgbt-friendly","workspace","in-house-baking"],"goodParking":true,"address":"652 Angier Ave NE, Atlanta, GA 30308","lat":33.7666568,"lng":-84.365959,"distance_miles":1.2},{"id":"green-beans","name":"Green Beans ATL","episode":22,"neighborhood":"Grant Park","address_note":null,"parking":{"description":"No dedicated lot. Plenty of free street neighborhood parking.","score":4},"ambiance":{"description":"Small but well-used space. Cozy neighborhood feel that chain shops fail to replicate.","score":5},"quality":{"description":"Iced chai was great and full of spices. Raspberry cheese twist was flaky and ooey-gooey.","score":4.5},"seating":"Surprising amount, all comfortable. Cozy alcove with outlets lining a gigantic booth.","outlets":"Lining the gigantic booth in the alcove","workFriendly":true,"workNotes":"Cozy alcove booth with outlets is perfect for working","drinkHighlight":"Iced Chai with Almond Milk","drinkNotes":"Great, full of spices","foodHighlight":"Raspberry & Cheese Twist","foodNotes":"Heated, flaky, ooey-gooey raspberry sweetness. Decent pastry selection. Also offers salads.","fillsUpAt":null,"tags":["cozy","neighborhood","salads"],"goodParking":true,"address":"760 United Ave SE, Atlanta, GA 30312","lat":33.7334769,"lng":-84.3647052,"distance_miles":1.1},{"id":"san-francisco-coffee","name":"San Francisco Coffee","episode":23,"neighborhood":"Virginia Highland","address_note":null,"parking":{"description":"Giant free parking lot out back. Extra street parking on side. Parking lot across street.","score":5},"ambiance":{"description":"Possibly the coziest coffee shop ever. Exposed brick, dark beams, twinkle lights. Felt like Christmas.","score":5},"quality":{"description":"Lavender matcha was grassy and bitter. Cinnamon knot had perfect texture and flaky layers.","score":3.5},"seating":"Plenty of seating — tables, private alcove, outdoor patio","outlets":"Not mentioned","workFriendly":true,"workNotes":"Plenty of seating options including a private alcove","drinkHighlight":"Lavender Matcha","drinkNotes":"Grassy and bitter — needed sweetener. Not her cup of tea.","foodHighlight":"Cinnamon Knot","foodNotes":"Perfect texture, flaky layers, perfectly moist. Multitude of pastries. Full breakfast sandwich menu.","fillsUpAt":null,"tags":["cozy","twinkle-lights","full-breakfast","community-events"],"goodParking":true,"address":"1192 N Highland Ave NE, Atlanta, GA 30306","lat":33.7873224,"lng":-84.3554485,"distance_miles":2.7},{"id":"east-pole","name":"East Pole","episode":24,"neighborhood":"Poncey-Highland","address_note":null,"parking":{"description":"Pretty large shared lot with 2-hour parking validation","score":5},"ambiance":{"description":"Sparse — tables, decor, selection. No frills. Only vanilla syrup and honey. But excellent hospitality.","score":3.5},"quality":{"description":"Vanilla latte was fine, nothing special. Queenamon pastry was really good with blueberry jam.","score":3.5},"seating":"Available but only a few outlets scattered around","outlets":"A few scattered around","workFriendly":true,"workNotes":"Remote workers paradise — pretty much everyone had laptops. Gets packed so arrive early.","drinkHighlight":"Iced Vanilla Latte","drinkNotes":"Fine, nothing special. Nice cup aesthetic.","foodHighlight":"Queenamon","foodNotes":"Croissant-like pastry with flaky layers filled with blueberry jam — really good","fillsUpAt":"Early","tags":["remote-worker-hub","minimalist","great-hospitality"],"goodParking":false,"address":"676 N Highland Ave NE, Atlanta, GA 30306","lat":33.7729588,"lng":-84.3526248,"distance_miles":1.9},{"id":"harbor-coffee","name":"Harbor Coffee","episode":25,"neighborhood":"Inman Park","address_note":null,"parking":{"description":"Row of free street parking outside. Plenty of free daytime street parking in Inman Park.","score":5},"ambiance":{"description":"Cozy, relaxed, industrial, living room feel. Sparse knick-knacks. Most pleasant baristas. Soft pop music.","score":4.5},"quality":{"description":"Blueberry oat milk matcha couldn't taste blueberry or matcha but still sweet. Lemon pound cake was dense and moist.","score":3.5},"seating":"Spacious with couches, barstools, dining tables (not all comfortable). Free 2-hour WiFi.","outlets":"Not a lot of outlets","workFriendly":true,"workNotes":"Free 2-hour WiFi. Not a lot of outlets. Fills up and gets popular.","drinkHighlight":"Blueberry Oat Milk Matcha","drinkNotes":"Couldn't taste blueberry or matcha but still sweet","foodHighlight":"Lemon Pound Cake","foodNotes":"Dense, moist, lemon flavor from icing. Limited but reasonably priced.","fillsUpAt":null,"tags":["cozy","relaxed","wifi-limit"],"goodParking":true,"address":"331 Elizabeth St NE, Atlanta, GA 30307","lat":33.7634814,"lng":-84.3584741,"distance_miles":1.2},{"id":"opo-coffee","name":"OPO Coffee","episode":26,"neighborhood":"Decatur","address_note":null,"parking":{"description":"Free 2-hour street parking a block away. 15-minute free parking right outside.","score":5},"ambiance":{"description":"Quintessential coffee shop. Chatter and light bossa nova. Window into the roastery where you can see beans being roasted.","score":5},"quality":{"description":"Earl Grey Ube Latte was vibrant purple and tasted like cereal milk/Froot Loops — highly recommended. Scone was a bit bland.","score":4.5},"seating":"Spacious and bright. Plenty of seating. Abundance of outlets.","outlets":"Abundance of outlets","workFriendly":true,"workNotes":"Easy to focus. Many remote workers. Abundance of outlets. Possibly favorite coffee shop of the series.","drinkHighlight":"Earl Grey Ube Latte","drinkNotes":"Vibrant purple. Tasted like cereal milk / Froot Loops. Highly recommended.","foodHighlight":"White Chocolate Pecan Cranberry Scone ($4)","foodNotes":"Sugary crust on top, a bit bland, messy. Cookies, scones, muffins around $4.","fillsUpAt":null,"tags":["roastery","remote-worker-hub","bossa-nova","favorite"],"goodParking":true,"address":"314 E Howard Ave, Decatur, GA 30030","lat":33.7718874,"lng":-84.2924404,"distance_miles":4.7},{"id":"stereo","name":"Stereo","episode":27,"neighborhood":"Unknown","address_note":"Also a bar at night","parking":{"description":"Medium-sized shared lot. Additional parking two blocks away.","score":4},"ambiance":{"description":"Hip office lobby vibes. Minimal yet impactful decor. Record player music but dead silent otherwise. Also a bar at night.","score":4},"quality":{"description":"Best matcha ever had ($8.50 with oat milk and white mocha syrup). All out of pastries with very limited selection.","score":5},"seating":"Huge, open, airy inside. Outdoor patio. Outdoor bar area. Outlets available.","outlets":"Available","workFriendly":true,"workNotes":"Most people were working. Very quiet — dead silent.","drinkHighlight":"Matcha Latte with Oat Milk & White Mocha","drinkNotes":"Best matcha ever had. $8.50.","foodHighlight":null,"foodNotes":"All out of pastries. Very limited food/drink selection.","fillsUpAt":null,"tags":["quiet","bar-at-night","minimalist","best-matcha"],"goodParking":false,"address":"900 DeKalb Ave NE, Atlanta, GA 30307","lat":33.7593608,"lng":-84.3512244,"distance_miles":1.3},{"id":"joes-coffee","name":"Joe's Coffee","episode":28,"neighborhood":"East Atlanta Village","address_note":null,"parking":{"description":"Plenty of free street parking","score":5},"ambiance":{"description":"Curated hipster. Intentionally mismatched. Art on floors/ceilings/walls. Bookshelf, mugs to use, record player. Eerie sinister-vibe music.","score":3},"quality":{"description":"Vanilla latte couldn't taste vanilla. Potato scallion empanada was flavorful with chimichurri.","score":3},"seating":"Lots of seating, mostly empty. People working from home.","outlets":"Not mentioned","workFriendly":true,"workNotes":"Lots of seating, mostly empty. People working from home.","drinkHighlight":"Vanilla Latte with Almond Milk","drinkNotes":"Fine but couldn't taste vanilla","foodHighlight":"Potato & Scallion Empanada","foodNotes":"Tasted like a samosa, flavorful, with chimichurri. Limited selection — most pastries were empanadas. Sweet and savory options.","fillsUpAt":null,"tags":["hipster","artsy","empanadas","record-player"],"goodParking":true,"address":"510 Flat Shoals Ave SE, Atlanta, GA 30316","lat":33.7403458,"lng":-84.3454252,"distance_miles":1.5},{"id":"little-tart","name":"Little Tart Bakery","episode":29,"neighborhood":"Grant Park","address_note":"Doubles as a bar later in the day","parking":{"description":"Huge free parking lot right outside","score":5},"ambiance":{"description":"Gorgeous interior. Doubles as a bar later in the day.","score":4},"quality":{"description":"Salted honey oat latte was great. Gluten-free lemon blueberry scone was dense, filling, and flavorful.","score":5},"seating":"Tables, booths, bar seating, outdoor patio — plenty of places to sit","outlets":"Not mentioned","workFriendly":true,"workNotes":"Fills up quickly and gets loud","drinkHighlight":"Salted Honey Oat Latte","drinkNotes":"Salt put it over the edge — great","foodHighlight":"GF Lemon Blueberry Scone","foodNotes":"Dense, filling, full blueberries, lemon cuts through nicely. Incredible baked goods selection with abundance of gluten-free options. Reasonably priced $4-$8. Brunch menu on weekends.","fillsUpAt":"Early","tags":["bakery","gluten-free-options","bar-at-night","brunch-weekends"],"goodParking":true,"address":"437 Memorial Dr SE, Atlanta, GA 30312","lat":33.7465617,"lng":-84.3731892,"distance_miles":0.3}];
+
+function init() {
+  populateNeighborhoods();
+  render();
+
+  document.getElementById('search').addEventListener('input', render);
+  document.getElementById('neighborhood').addEventListener('change', render);
+  document.getElementById('sort').addEventListener('change', render);
+  ['workFilter', 'parkingFilter'].forEach(groupId => {
+    document.querySelectorAll(`#${groupId} button`).forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll(`#${groupId} button`).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        render();
+      });
+    });
+  });
+}
+
+function populateNeighborhoods() {
+  const hoods = [...new Set(SHOPS.map(s => s.neighborhood))].sort();
+  const sel = document.getElementById('neighborhood');
+  hoods.forEach(h => {
+    const opt = document.createElement('option');
+    opt.value = h;
+    opt.textContent = h;
+    sel.appendChild(opt);
+  });
+}
+
+function avgScore(shop) {
+  const scores = [shop.parking.score, shop.ambiance.score, shop.quality.score].filter(s => s !== null);
+  if (scores.length === 0) return null;
+  return scores.reduce((a, b) => a + b, 0) / scores.length;
+}
+
+function render() {
+  const query = document.getElementById('search').value.toLowerCase().trim();
+  const hood = document.getElementById('neighborhood').value;
+  const workVal = document.querySelector('#workFilter button.active').dataset.val;
+  const parkVal = document.querySelector('#parkingFilter button.active').dataset.val;
+  const sortBy = document.getElementById('sort').value;
+
+  let filtered = SHOPS.filter(shop => {
+    if (hood && shop.neighborhood !== hood) return false;
+    if (workVal === 'yes' && !shop.workFriendly) return false;
+    if (workVal === 'no' && shop.workFriendly) return false;
+    if (parkVal === 'good' && !shop.goodParking) return false;
+    if (query) {
+      const haystack = [
+        shop.name, shop.neighborhood, shop.address_note,
+        shop.drinkHighlight, shop.drinkNotes,
+        shop.foodHighlight, shop.foodNotes,
+        shop.workNotes, shop.seating,
+        shop.parking.description, shop.ambiance.description, shop.quality.description,
+        ...(shop.tags || [])
+      ].filter(Boolean).join(' ').toLowerCase();
+      return haystack.includes(query);
+    }
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    if (sortBy === 'name') return a.name.localeCompare(b.name);
+    if (sortBy === 'neighborhood') return a.neighborhood.localeCompare(b.neighborhood) || a.name.localeCompare(b.name);
+    if (sortBy === 'avg-score') {
+      const sa = avgScore(a), sb = avgScore(b);
+      if (sa === null && sb === null) return a.episode - b.episode;
+      if (sa === null) return 1;
+      if (sb === null) return -1;
+      return sb - sa;
+    }
+    if (sortBy === 'distance') {
+      const da = a.distance_miles || 999, db = b.distance_miles || 999;
+      return da - db;
+    }
+    return a.episode - b.episode;
+  });
+
+  document.getElementById('count').textContent = filtered.length + ' of ' + SHOPS.length + ' shops';
+
+  const grid = document.getElementById('grid');
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty"><p>No shops match your filters.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(shop => {
+    const fmtScore = (s) => s !== null ? s.toFixed(1) : '—';
+    const scoreClass = (s) => s !== null ? '' : ' empty';
+
+    const badges = [];
+    if (shop.workFriendly) {
+      badges.push(`<span class="badge work-yes">&#9889; Work-friendly</span>`);
+    } else {
+      badges.push(`<span class="badge work-no">&#10005; Not for work</span>`);
+    }
+    if (shop.goodParking) {
+      badges.push(`<span class="badge outlets">&#127359;&#65039; Free parking</span>`);
+    }
+    if (shop.outlets && shop.outlets !== 'Not mentioned' && shop.outlets !== 'None') {
+      badges.push(`<span class="badge outlets">&#9889; ${escHtml(shop.outlets)}</span>`);
+    }
+    if (shop.fillsUpAt) {
+      badges.push(`<span class="badge fills">&#9200; Fills up ${escHtml(shop.fillsUpAt)}</span>`);
+    }
+
+    return `
+      <div class="card">
+        <div class="card-head">
+          <h2>${escHtml(shop.name)}</h2>
+          <span class="ep">Ep ${shop.episode}</span>
+        </div>
+        <div class="card-neighborhood">
+          ${escHtml(shop.neighborhood)}${shop.distance_miles ? ` &middot; ${shop.distance_miles} mi` : ''}
+          ${shop.address ? `<span class="note">${escHtml(shop.address)}</span>` : ''}
+          ${shop.address_note ? `<span class="note">${escHtml(shop.address_note)}</span>` : ''}
+        </div>
+        <div class="scores">
+          <div class="score-cell">
+            <div class="label">Parking</div>
+            <div class="value${scoreClass(shop.parking.score)}">${fmtScore(shop.parking.score)}</div>
+          </div>
+          <div class="score-cell">
+            <div class="label">Ambiance</div>
+            <div class="value${scoreClass(shop.ambiance.score)}">${fmtScore(shop.ambiance.score)}</div>
+          </div>
+          <div class="score-cell">
+            <div class="label">Quality</div>
+            <div class="value${scoreClass(shop.quality.score)}">${fmtScore(shop.quality.score)}</div>
+          </div>
+        </div>
+        <div class="highlights">
+          <div class="highlight-row">
+            <div class="icon drink">&#9749;</div>
+            <div class="hl-content">
+              <div class="hl-name">${escHtml(shop.drinkHighlight || 'Not mentioned')}</div>
+              <div class="hl-note">${escHtml(shop.drinkNotes || '')}</div>
+            </div>
+          </div>
+          ${shop.foodHighlight ? `
+          <div class="highlight-row">
+            <div class="icon food">&#127838;</div>
+            <div class="hl-content">
+              <div class="hl-name">${escHtml(shop.foodHighlight)}</div>
+              <div class="hl-note">${escHtml(shop.foodNotes || '')}</div>
+            </div>
+          </div>` : ''}
+          <div class="highlight-row">
+            <div class="icon park">&#128663;</div>
+            <div class="hl-content">
+              <div class="hl-name">Parking</div>
+              <div class="hl-note">${escHtml(shop.parking.description)}</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          ${badges.join('')}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function escHtml(str) {
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+init();
+</script>
+</body>
+</html>
